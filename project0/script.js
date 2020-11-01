@@ -12,8 +12,6 @@ const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
  
 function newTodo() {
-  //alert('New TODO button clicked!')
-
   const newItem = createNewTodoItem();
   list.appendChild(newItem);
   
