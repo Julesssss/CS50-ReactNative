@@ -16,7 +16,11 @@ function newTodo() {
 
   const newItem = createNewTodoItem();
   list.appendChild(newItem);
+  
+  updateCounts();
+}
 
+function updateCounts() {
   updateItemCount();
   updateUncheckedCount();
 }
@@ -39,10 +43,25 @@ function createNewTodoItem() {
   // Add input
   const itemName = document.createElement('input')
   itemName.type="text"
+  itemName.size = 30;
   itemName.className = classNames.TODO_TEXT
-  newTodoItem.appendChild(itemName);
+  newTodoItem.appendChild(itemName)
+
+  // Add delete button
+  const button = document.createElement('button')
+  button.className = classNames.TODO_DELETE
+  button.textContent = "Delete"
+  button.addEventListener('click', (event) => {
+    deleteItemAt(newTodoItem);
+  })
+  newTodoItem.appendChild(button)
 
   return newTodoItem;
+}
+
+function deleteItemAt(node) {
+  list.removeChild(node);
+  updateCounts();
 }
 
 function updateItemCount() {
