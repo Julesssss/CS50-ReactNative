@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import CustomButton from '../project1/components/custombutton';
 
 const secondsIn5Mins = 60 * 5
 const secondsIn25Mins = 60 * 25
@@ -44,8 +43,8 @@ export default class App extends React.Component {
   onButtonStart = function () {
     console.log('Button Start')
     
-    //let timer = setInterval(() => {this.tick()}, 1000);
-    //this.setState({timer})
+    let timer = setInterval(() => {this.tick()}, 1000);
+    this.setState({timer})
   }
 
   onButtonStop = function () {
@@ -59,7 +58,8 @@ export default class App extends React.Component {
     clearInterval(this.state.timer);
     
     this.setState({
-      counter: secondsIn25Mins
+      counter: secondsIn25Mins,
+      counterFormatted: this.formatTime(secondsIn25Mins)
     })
   }
 
@@ -89,9 +89,31 @@ export default class App extends React.Component {
         <View style={styles.centerContainer}>
         <Text style={styles.textClock}>{this.state.counterFormatted}</Text>
           <View style={styles.buttonContainer}>
-          <CustomButton onPress={() => this.onButtonStart} title='Start' />            
-          <CustomButton onPress={() => this.onButtonStop} title='Stop' />            
-          <CustomButton onPress={() => this.onButtonReset} title='Reset' />            
+            <View style={styles.button}>
+              <Button
+                title="Start"
+                style={styles.button}
+                color= '#43d'
+                onPress={() => {this.onButtonStart()}}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                title="Stop"
+                style={styles.button}
+                color= '#43d'
+                onPress={() => {this.onButtonStop()}}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                title="Reset"
+                margin='16'
+                style={styles.button}
+                color= '#43d'
+                onPress={() => {this.onButtonReset()}}
+              />
+              </View>
           </View>
         </View>
       </View>
@@ -120,4 +142,8 @@ const styles = StyleSheet.create({
   textClock: {
     fontSize: 80
   },
+  button: {
+    marginStart: 8,
+    marginEnd: 4
+  }
 });
